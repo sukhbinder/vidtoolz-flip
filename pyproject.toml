@@ -1,0 +1,33 @@
+[project]
+name = "vidtoolz-flip"
+version = "0.0.1"
+description = "Flip a vedio vertically or horizontally"
+readme = "README.md"
+authors = [{name = "Sukhbinder Singh"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "vidtoolz",
+]
+
+[project.urls]
+Homepage = "https://github.com/sukhbinder/vidtoolz-flip"
+Changelog = "https://github.com/sukhbinder/vidtoolz-flip/releases"
+Issues = "https://github.com/sukhbinder/vidtoolz-flip/issues"
+CI = "https://github.com/sukhbinder/vidtoolz-flip/actions"
+
+[project.entry-points."vidtoolz_plugins"]
+flip = "vidtoolz_flip:flip_plugin"
+
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
