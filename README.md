@@ -24,6 +24,22 @@ vidtoolz install vidtoolz-flip
 
 type ``vid flip --help`` to get help
 
+```bash
+usage: vid flip [-h] [-f {vflip,hflip}] [-o OUTPUT] input
+
+Flip a vedio vertically or horizontally
+
+positional arguments:
+  input                 Single file name
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f {vflip,hflip}, --fliptype {vflip,hflip}
+                        Flip type vertical or horizontal (default: vflip)
+  -o OUTPUT, --output OUTPUT
+                        Output file (default: None)
+
+```
 
 
 ## Development
