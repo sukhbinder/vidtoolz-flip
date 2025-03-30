@@ -2,6 +2,7 @@ import vidtoolz
 import subprocess
 import os
 
+
 def determine_output_path(input_file, output_file):
     input_dir, input_filename = os.path.split(input_file)
     name, _ = os.path.splitext(input_filename)
@@ -15,13 +16,12 @@ def determine_output_path(input_file, output_file):
         return os.path.join(input_dir, f"{name}_flip.mp4")
 
 
-
 def flip_video(input_file, output_file, fliptype):
     try:
         # Check if the input file exists
         if not os.path.exists(input_file):
             raise FileNotFoundError(f"Input file '{input_file}' not found.")
-        
+
         # Define the FFmpeg command
         command = [
             "ffmpeg",
@@ -51,11 +51,14 @@ def flip_video(input_file, output_file, fliptype):
         print(f"Error: {re}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-    
+
     return output_file
 
+
 def create_parser(subparser):
-    parser = subparser.add_parser("flip", description="Flip a vedio vertically or horizontally")
+    parser = subparser.add_parser(
+        "flip", description="Flip a vedio vertically or horizontally"
+    )
     # Add subprser arguments here.
     parser.add_argument("input", type=str, help="Single file name")
     parser.add_argument(
@@ -75,22 +78,25 @@ def create_parser(subparser):
     )
     return parser
 
+
 class ViztoolzPlugin:
-    """ Flip a vedio vertically or horizontally """
+    """Flip a vedio vertically or horizontally"""
+
     __name__ = "flip"
 
     @vidtoolz.hookimpl
     def register_commands(self, subparser):
         self.parser = create_parser(subparser)
         self.parser.set_defaults(func=self.run)
-        
+
     def run(self, args):
         output = determine_output_path(args.input, args.output)
-        outputfile = flip_video(args.input, output, args.fliptype )
+        outputfile = flip_video(args.input, output, args.fliptype)
         print("{} created.".format(outputfile))
-    
+
     def hello(self, args):
         # this routine will be called when "vidtoolz "flip is called."
         print("Hello! This is an example ``vidtoolz`` plugin.")
+
 
 flip_plugin = ViztoolzPlugin()
